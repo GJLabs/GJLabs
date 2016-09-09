@@ -12,7 +12,6 @@ module.exports = {
 	}, 
 	post: (req, res) => {
 		const data = req.body;
-		console.log('beer data:', data)
 		Beer.create({
 			beerId: data.beerId,
 			ibu: data.ibu,
