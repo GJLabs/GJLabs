@@ -4,6 +4,8 @@
 
 // 2. Many Graph Nodes (1 Step) - Many Beers (Medium)
 
+// 2.5 Many Graph Nodes (1 Step) - Many Beers (Medium)
+
 // 3. Many Graph Nodes (2+ Steps) - Many Beers (Hard)
 
 

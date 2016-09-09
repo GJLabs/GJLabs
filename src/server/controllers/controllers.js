@@ -85,8 +85,9 @@ var makeReq = function(results, styles, startIBU, startABV, count, res, index, i
       var beer = Math.floor(Math.random() * results.length); 
       beer = results[beer]; 
       var styleFamily = findStyleFamily(beer.styleId, styleFamilies); 
-      beer['styleFamily'] = styleFamily; 
-      console.log(beer); 
+      // console.log('STYLE FAMILY IS: ', styleFamily); 
+      beer['styleFamily'] = styleFamily[1]; 
+      beer['styleFamilyId'] = styleFamily[0]; 
       res.json(beer); 
     } else {
       results.push(getResponse.data.data);
@@ -184,18 +185,22 @@ allStyles.sort(function(a,b) {
   return a - b; 
 }); 
 
-
+// Utility helper function for adding a given beer's styleFamily and styleFamilyId properties
+// to the returned object. 
 var findStyleFamily = function(styleId, styleFamilyObject) {
+  var styleFamilyResult = []; 
   if (styleFamilyObject[styleId] !== undefined) {
-    return styleFamilyObject[styleId]; 
+    styleFamilyResult.push(styleId, styleFamilyObject[styleId]); 
+    return styleFamilyResult; 
   }
   var styleKeys = Object.keys(styleFamilyObject); 
   styleKeys.forEach((style) => {
-    if (styleFamilyObject[style].indexOf(styleId) !== -1) {
-      return styleFamilyObject[style]; 
+    var currentStyleFamily = styleFamilyObject[style]; 
+    if (currentStyleFamily.indexOf(styleId) !== -1) {
+      styleFamilyResult.push(style, currentStyleFamily); 
     }
-  })
-  return null; 
+  }); 
+  return styleFamilyResult; 
 }
 
 var styleQuery = function() {

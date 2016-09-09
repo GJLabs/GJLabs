@@ -27,6 +27,9 @@ var algorithm = function(beerList) {
 	var algorithmCase = categoryConfirm(styleFamily, beerListStylesId); 
 	console.log('algorithmCase is: ', algorithmCase); 
 
+	var nodesList = findAllNodes(beerList, styleFamily); 
+	console.log(nodesList); 
+
 	// Step 2. Calculate Query String Values (styles, abv, ibu, srm)
 
 	//////
