@@ -31,7 +31,7 @@ var User = sequelize.define('user', {
 
 // Defines Beer table
 var Beer = sequelize.define('beer', {
-  beerId: {type: Sequelize.STRING, null:false, primaryKey: true},
+  beerId: {type: Sequelize.STRING, null:false, unique: true},
   ibu: {type: Sequelize.FLOAT},
   srm: {type: Sequelize.FLOAT},
   abv: {type: Sequelize.FLOAT}
