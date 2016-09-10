@@ -16,6 +16,8 @@ module.exports = function (app, express) {
   app.post('/api/user/suggestion', controllers.algorithmPost); 
   app.get('/api/user/suggestion', controllers.algorithmPost);
 
+  app.get('/api/user/moreSuggestions/:userId', controllers.algorithmGet);
+
   // Gets all users
   app.get('/api/users', UsersController.get);
   // Creates new user. 

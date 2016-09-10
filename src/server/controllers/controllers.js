@@ -4,6 +4,10 @@ var API_KEY = require('../key/config.js');
 var Promise = require('bluebird'); 
 var _ = Promise.promisifyAll(require('underscore'));
 var beerStyles = require('../../../beerdata/beerStyles.js'); 
+//sqlize
+var User = require('../models/models.js').User;
+var Beer = require('../models/models.js').Beer;
+var BeerLog = require('../models/models.js').BeerLog;
 
 //// DATA FOR ALGORITHM //// 
 var algorithm = require('./algorithm.js');  
@@ -36,16 +40,33 @@ module.exports = {
   }, 
 
   algorithmPost: function (req, res, next) {
+    console.log('req.body:', req.body);
     var algorithmResult = algorithm(beerList); 
     var results = [];
+
     var startIBU = algorithmResult.ibu; //req.data.ibu;
     var startABV = algorithmResult.abv;
     var styles = algorithmResult.styles; 
     var styleCount = algorithmResult.styleCount; 
     algorithmRequest(results, styles, styleCount, startIBU, startABV, 0, res, 0); 
     // res.send(algorithmResult); 
+  },
+
+  algorithmGet: function (req, res, next) {
+    getBeerList(req.params.userId).then(function(beerList) {
+      var algorithmResult = algorithm(beerList); 
+      var results = [];
+      var startIBU = algorithmResult.ibu; //req.data.ibu;
+      var startABV = algorithmResult.abv;
+      var styles = algorithmResult.styles; 
+      var styleCount = algorithmResult.styleCount; 
+      algorithmRequest(results, styles, styleCount, startIBU, startABV, 0, res, 0); 
+      // res.send(algorithmResult); 
+    })
   }
-}; 
+};
+
+
 
 
 // Controllers List 
@@ -211,7 +232,11 @@ var styleQuery = function() {
   .then(function(getResponse) {
 
   });
+}
 
-
+var getBeerList = function(userId){
+  return User.findById(userId).then(function(user) {
+    return user.getBeers()
+  });
 }
       
