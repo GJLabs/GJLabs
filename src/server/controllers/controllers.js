@@ -53,7 +53,6 @@ module.exports = {
   },
 
   algorithmGet: function (req, res, next) {
-    console.log('req.body:', req.body);
     getBeerList(req.params.userId).then(function(beerList) {
       var algorithmResult = algorithm(beerList); 
       var results = [];

@@ -2,7 +2,7 @@ var graphs = require('../graph/node.js');
 var aleGraph = graphs.aleGraph; 
 var lagerGraph = graphs.lagerGraph; 
 var styleFamilies = require('../../../beerdata/styleFamilies.js'); 
-// var stylesData = require('../../../beerdata/styles.json'); 
+var stylesData = require('../../../beerdata/styles.js'); 
 var User = require('../models/models.js').User;
 var Beer = require('../models/models.js').Beer;
 var BeerLog = require('../models/models.js').BeerLog;
@@ -14,7 +14,7 @@ var algorithm = function(beerList) {
 	var beerListStylesId = beerList.map((beer) => beer.styleId); 
 	var beerListStyleFamilyIds = beerList.map((beer) => beer.styleFamilyId);
 	console.log('STYLE FAMILY IDS: ', beerListStyleFamilyIds); 
-
+	// console.log('beerList:', beerList);
 	// Step 1. Determine the Specific Case: 
 
 	// !! TODO !! 
