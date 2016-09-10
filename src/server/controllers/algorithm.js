@@ -3,6 +3,9 @@ var aleGraph = graphs.aleGraph;
 var lagerGraph = graphs.lagerGraph; 
 var styleFamilies = require('../../../beerdata/styleFamilies.js'); 
 // var stylesData = require('../../../beerdata/styles.json'); 
+var User = require('../models/models.js').User;
+var Beer = require('../models/models.js').Beer;
+var BeerLog = require('../models/models.js').BeerLog;
 
 var beerList = require('../../../beerdata/multipleExample.js'); 
 
