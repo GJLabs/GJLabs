@@ -85,6 +85,7 @@ var algorithm = function(beerList) {
 				topStyle.name = style; 
 			}
 		}); 
+		
 		algorithmResult.topStyle = topStyle.name;
 
 		algorithmResult.styles = styleKeys; 

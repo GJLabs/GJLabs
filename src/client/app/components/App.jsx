@@ -40,7 +40,7 @@ export default class App extends Component {
     const userId = localStorage.userId;
     axios.get('/api/user/moreSuggestions/' + userId)
     .then((response) => {
-      this.setState({beers: [response.data]});
+      this.setState({recommendation: response.data});
       browserHistory.push(`/results`);
     })
     .catch((err) => {
