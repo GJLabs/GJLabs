@@ -160,7 +160,8 @@ var algorithmRequest = function(algorithmResult, results, styles, styleCount, st
         var startIndex = responseArray.length - styleCount[style]; 
         startIndex = Math.floor(Math.random() * startIndex); 
         var endIndex = startIndex + styleCount[style]; 
-        responseArray.slice(startIndex, endIndex); 
+        responseArray = responseArray.slice(startIndex, endIndex); 
+        results.push(responseArray); 
       } else {
         results.push(getResponse.data.data);
       }
@@ -192,9 +193,7 @@ var algorithmRequest = function(algorithmResult, results, styles, styleCount, st
         var endIndex = startIndex + styleCount[style]; 
         responseArray = responseArray.slice(startIndex, endIndex); 
         results.push(responseArray); 
-        // console.log('ADDING ', responseArray.length, 'BEERS TO THE LIST!'); 
       } else {
-        // console.log('ADDING ', responseArray.length, 'BEERS TO THE LIST!'); 
         results.push(getResponse.data.data);
       }
       results.push(algorithmRequest(algorithmResult, results, styles, styleCount, startIBU, startABV, 0, res, index + 1));
@@ -304,6 +303,11 @@ var addDataToResponseObject = function (responseObject, algorithmResult, average
   }   
   responseObject.color = resultStringGeneratorSRM(algorithmResult, averageBeer, 'srm'); 
   responseObject.bitter = resultStringGeneratorIBU(algorithmResult, averageBeer, 'ibu'); 
+  var color = resultStringGeneratorSRM(algorithmResult, averageBeer, 'srm'); 
+  var bitter = resultStringGeneratorIBU(algorithmResult, averageBeer, 'ibu'); 
+  var categories = algorithmResult.topThreeCategories; 
+  var favoriteStyle = algorithmResult.topStyle; 
+  responseObject.flavorText = addFlavorText(responseObject, color, bitter, categories, favoriteStyle); 
   return responseObject; 
 }
 
@@ -379,4 +383,12 @@ var resultStringGeneratorSRM = function(object, comparison, key) {
   }
   return string; 
 }
-      
+    
+var addFlavorText = function(responseObject, color, bitter, categories, favoriteStyle) {
+  var category1 = categories[0];
+  var category2 = categories[1];
+  var category3 = categories[2]; 
+
+  var template = `After analyzing your Bru profile, it appears that you prefer a ${color} beer, with a ${bitter}. Our algorithm indicates that you may enjoy ${category1}, ${category2} and ${category3}. Based on your taste profile, we have selected the following beers for you, with a special focus on the ${favoriteStyle} style. Continue to add beers that you like to your taste profile, so that we can help you find your perfect Bru!`; 
+  return template; 
+}
