@@ -24,6 +24,7 @@ export default class BeerEntry extends Component {
     return name;
   }
   componentWillMount() {
+    console.log(this.props.beer); 
     this.setState({
       beerId: this.props.beer.id,
       description: this.props.beer.description,
