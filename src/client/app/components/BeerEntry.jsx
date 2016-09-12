@@ -76,27 +76,29 @@ export default class BeerEntry extends Component {
   render() { 
     return (
         <div className="col s4">
-          <div className="card small">
+          <div className="card medium">
             <div className="card-image">
               <img style={{height: '100%', width: 'auto', margin: '5px auto', paddingBottom: '5px', borderRadius: '20px'}} className='responsive-img activator' src={this.state.imageUrl} />
             </div>
-            <div className="card-content activator valign-wrapper">
-              <span className="card-title activator grey-text text-
-              darken-4" 
-                style={{fontSize: '18px', lineHeight: '100%'}}>{this.state.beerName}
-              </span><i className="material-icons right">more_vert</i>
-              <p className='center-align valign'>
-                <input 
-                  type="checkbox" 
-                  className="filled-in right" 
-                  id={this.state.beerId} 
-                  value={this.state.beerId}
-                  onChange={this.likeHandler.bind(this)}
-                />
-                <label htmlFor={this.state.beerId}></label>
-              </p>
+            <div className="card-content activator">
+              <div className='valign-wrapper'>
+                <span className="card-title activator grey-text text-
+                darken-4" 
+                  style={{fontSize: '18px', lineHeight: '100%'}}>{this.state.beerName}
+                </span><i className="material-icons right">more_vert</i>
+                <p className='center-align valign'>
+                  <input 
+                    type="checkbox" 
+                    className="filled-in right" 
+                    id={this.state.beerId} 
+                    value={this.state.beerId}
+                    onChange={this.likeHandler.bind(this)}
+                  />
+                  <label htmlFor={this.state.beerId}></label>
+                </p>
+              </div>
               <div className='left'>
-                <p>{this.state.flavorText}</p>
+                <p><span className="blue-text">Analysis: </span>{this.state.flavorText}</p>
               </div>
             </div>
             <div className="card-reveal">
